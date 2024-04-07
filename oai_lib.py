@@ -46,8 +46,10 @@ def display_xml_tree(xml_tree, rankdir="TB"):
         ]
         if u.text is not None:
             f.append(f"<tr><td align='left' colspan='2'><I>{escape(u.text)}</I></td></tr>")
+        localname = escape(etree.QName(u).localname)
+        attributes = "".join(f)
         stream.write(
-            f"{n} [ shape=none, label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>{escape(etree.QName(u).localname)}</B></td></tr>{"".join(f)}</table> > ] \n"
+            f"{n} [ shape=none, label=< <table color='#666666' cellborder='0' cellspacing='0' border='1'><tr><td colspan='2' bgcolor='grey'><B>{localname}</B></td></tr>{attributes}</table> > ] \n"
         )
     stream.write("}\n")
 
